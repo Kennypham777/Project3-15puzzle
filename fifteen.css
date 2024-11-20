@@ -1,0 +1,33 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  #puzzle-container {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    gap: 2px;
+    justify-content: center;
+    margin: 20px auto;
+    width: 408px; /* 4 tiles + 3 gaps of 2px */
+  }
+  
+  .puzzle-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #eee;
+    cursor: pointer;
+  }
+  
+  .blank {
+    background-color: white;
+    border: none;
+    cursor: default;
+  }
+  
