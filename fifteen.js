@@ -34,38 +34,39 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // get the neighbors of the empty tile (which is represented by 15)
+    // get the neighbors of the empty tile (which is on index 15)
     function getEmptyTileNeighbors(emptyIndex) {
+        // calculate row and column of empty tile
         const row = Math.floor(emptyIndex / gridSize);
         const col = emptyIndex % gridSize;
-        const neighbors = [];
 
-        // check for valid neighbors (up, down, left, right)
+        const neighbors = []; // empty array that will hold neighbors
+
+        // check for valid neighbors (if there is a row/column up, down, left, right of empty tile)
         if (row > 0) neighbors.push(emptyIndex - gridSize); // up
         if (row < gridSize - 1) neighbors.push(emptyIndex + gridSize); // down
         if (col > 0) neighbors.push(emptyIndex - 1); // left
         if (col < gridSize - 1) neighbors.push(emptyIndex + 1); // right
 
-        return neighbors;
+        return neighbors; //returns array of neighbors to empty tile
     }
 
     // shuffle the tiles by moving random neighbors to the empty space
     function shuffleTiles() {
-        const tiles = Array.from(puzzleContainer.getElementsByClassName("puzzle-tile"));
+        const tiles = Array.from(puzzleContainer.getElementsByClassName("puzzle-tile")); //array of all tiles by getting stuff with puzzle-tile class
         let emptyIndex = tiles.length - 1; // initially, the empty tile is at the last position
-        const movesCount = 300; // perform a few hundred random moves
+        const movesCount = 100; // amount of moves to make for shuffling
 
-        for (let i = 0; i < movesCount; i++) {
-            const neighbors = getEmptyTileNeighbors(emptyIndex);
-            const randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
+        for (let i = 0; i < movesCount; i++) { //loop based on movesCount
+            const neighbors = getEmptyTileNeighbors(emptyIndex); //gets an array of all neighbors of empty tile
+            const randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)]; //randomly pick a neighbor to swap empty tile with
 
-            // swap the empty tile with the randomly selected neighbor
-            [tiles[emptyIndex].textContent, tiles[randomNeighbor].textContent] =
-                [tiles[randomNeighbor].textContent, tiles[emptyIndex].textContent];
-            [tiles[emptyIndex].style.backgroundPosition, tiles[randomNeighbor].style.backgroundPosition] =
+            // swap the empty tile with the randomly selected neighbor (swapping position, number, background)
+            [tiles[emptyIndex].textContent, tiles[randomNeighbor].textContent] = [tiles[randomNeighbor].textContent, tiles[emptyIndex].textContent];
+            [tiles[emptyIndex].style.backgroundPosition, tiles[randomNeighbor].style.backgroundPosition] = 
                 [tiles[randomNeighbor].style.backgroundPosition, tiles[emptyIndex].style.backgroundPosition];
 
-            // update the emptyIndex
+            // after swapping, update empty tile to the new position
             emptyIndex = randomNeighbor;
         }
     }
