@@ -4,7 +4,7 @@ body {
     padding: 0;
 }
 
-/* Puzzle Grid Styling */
+/* puzzle grid styling */
 #puzzle-container {
     display: grid;
     grid-template-columns: repeat(4, 100px); /* 4 columns */
@@ -15,7 +15,7 @@ body {
     height: 404px;
 }
 
-/* Tile Styling */
+/* tile styling */
 .puzzle-tile {
     width: 100px;
     height: 100px;
@@ -25,16 +25,11 @@ body {
     border: 2px solid black;
     box-sizing: border-box;
     color: #000;
-    background-size: 400px 400px; /* Adjust based on full image size */
+    background-size: 400px 400px; /* adjust based on full image size */
     background-repeat: no-repeat;
     cursor: pointer;
     position: relative;
     transition: transform 0.3s ease-in-out;
-}
-
-/* Shuffle Button */
-#controls {
-    margin: 20px;
 }
 
 #shuffle-btn {
