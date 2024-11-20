@@ -1,33 +1,45 @@
-
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-  }
-  
-  #puzzle-container {
+    margin: 0;
+    padding: 0;
+}
+
+/* Puzzle Grid Styling */
+#puzzle-container {
     display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: repeat(4, 100px);
-    gap: 2px;
-    justify-content: center;
+    grid-template-columns: repeat(4, 100px); /* 4 columns */
+    grid-gap: 2px;
     margin: 20px auto;
-    width: 408px; /* 4 tiles + 3 gaps of 2px */
-  }
-  
-  .puzzle-tile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    width: 404px; /* 400px grid + 4px total borders */
+    height: 404px;
+}
+
+/* Tile Styling */
+.puzzle-tile {
+    width: 100px;
+    height: 100px;
+    font-size: 32px;
+    line-height: 100px;
+    text-align: center;
     border: 2px solid black;
-    font-size: 24px;
-    font-weight: bold;
-    background-color: #eee;
+    box-sizing: border-box;
+    color: #000;
+    background-size: 400px 400px; /* Adjust based on full image size */
+    background-repeat: no-repeat;
     cursor: pointer;
-  }
-  
-  .blank {
-    background-color: white;
-    border: none;
-    cursor: default;
-  }
-  
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Shuffle Button */
+#controls {
+    margin: 20px;
+}
+
+#shuffle-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
