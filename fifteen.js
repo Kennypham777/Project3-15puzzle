@@ -61,10 +61,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const neighbors = getEmptyTileNeighbors(emptyIndex); //gets an array of all neighbors of empty tile
             const randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)]; //randomly pick a neighbor to swap empty tile with
 
-            // swap the empty tile with the randomly selected neighbor (swapping position, number, background)
+            // swap the empty tile with the randomly selected neighbor (swapping position, number, background, id)
             [tiles[emptyIndex].textContent, tiles[randomNeighbor].textContent] = [tiles[randomNeighbor].textContent, tiles[emptyIndex].textContent];
             [tiles[emptyIndex].style.backgroundPosition, tiles[randomNeighbor].style.backgroundPosition] = 
                 [tiles[randomNeighbor].style.backgroundPosition, tiles[emptyIndex].style.backgroundPosition];
+            [tiles[emptyIndex].dataset.id, tiles[randomNeighbor].dataset.id] = [tiles[randomNeighbor].dataset.id, tiles[emptyIndex].dataset.id];
+
 
             // after swapping, update empty tile to the new position
             emptyIndex = randomNeighbor;
