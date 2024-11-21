@@ -1,0 +1,31 @@
+body{
+    display: flex;
+    justify-content: center;
+    background-color: lightgreen;
+}
+div{
+    border: 2px solid green;
+    border-radius: 10px;
+    background-color: azure;
+    box-shadow: 3px 3px green;
+    text-align: center;
+    padding: 20px;
+}
+h3{
+    text-decoration: underline;
+}
+a{
+    color: black;
+    font-size: 30px;
+    text-decoration: none;
+    background-color: white;
+}
+a:hover{
+    text-decoration: underline;
+    color: green;
+}
+.normal{
+    text-decoration: none;
+    font-size: 18px;
+    background-color: lightgreen;
+}
