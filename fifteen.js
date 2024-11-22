@@ -142,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
             [clickedTile.textContent, emptyTile.textContent] = [emptyTile.textContent, clickedTile.textContent];
             [clickedTile.style.backgroundPosition, emptyTile.style.backgroundPosition] =
                 [emptyTile.style.backgroundPosition, clickedTile.style.backgroundPosition];
+            [clickedTile.dataset.id, emptyTile.dataset.id] = [emptyTile.dataset.id, clickedTile.dataset.id];
     
             // update the class to reflect the new empty tile position
             clickedTile.classList.add("empty-tile");
@@ -181,11 +182,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // swap the empty tile with the randomly selected neighbor (swapping position, number, background, id)
             [tiles[emptyIndex].textContent, tiles[randomNeighbor].textContent] = 
-            [tiles[randomNeighbor].textContent, tiles[emptyIndex].textContent];
-                [tiles[emptyIndex].style.backgroundPosition, tiles[randomNeighbor].style.backgroundPosition] = 
-            [tiles[randomNeighbor].style.backgroundPosition, tiles[emptyIndex].style.backgroundPosition];
-                [tiles[emptyIndex].dataset.id, tiles[randomNeighbor].dataset.id] = 
-            [tiles[randomNeighbor].dataset.id, tiles[emptyIndex].dataset.id];
+                [tiles[randomNeighbor].textContent, tiles[emptyIndex].textContent];
+            [tiles[emptyIndex].style.backgroundPosition, tiles[randomNeighbor].style.backgroundPosition] = 
+                [tiles[randomNeighbor].style.backgroundPosition, tiles[emptyIndex].style.backgroundPosition];
+            [tiles[emptyIndex].dataset.id, tiles[randomNeighbor].dataset.id] = 
+                [tiles[randomNeighbor].dataset.id, tiles[emptyIndex].dataset.id];
 
             // update the empty-tile class to the new position
             tiles[randomNeighbor].classList.add("empty-tile");
