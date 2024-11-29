@@ -45,13 +45,21 @@ body {
     box-shadow: 0 0 15px rgba(76, 175, 80, 0.7); 
 }
 
-#shuffle-btn {
+#shuffle-btn, #background-select-link {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    color: black;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
 }
 
-#shuffle-btn:hover {
+#shuffle-btn:hover, #background-select-link {
     background-color: #ddd;
 }
 #game-over-overlay h1 {
@@ -72,4 +80,29 @@ body {
 
 #game-over-overlay button:hover {
     background-color: #ff9800;
+}
+
+
+#stats {
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+#toggle-music-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    color: black;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#toggle-music-btn:hover {
+    background-color: #ddd;
 }

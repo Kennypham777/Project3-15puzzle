@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Puzzle Background</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .background-option {
+            margin: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border 0.3s;
+        }
+        .background-option:hover {
+            border: 2px solid #007BFF;
+        }
+        img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Select a Background for Your Puzzle</h1>
+    <div id="background-options">
+        <img src="background1.png" class="background-option" alt="Background 1" data-image="background1.png">
+        <img src="background2.jpg" class="background-option" alt="Background 2" data-image="background2.jpg">
+        <img src="background3.jpg" class="background-option" alt="Background 3" data-image="background3.jpg">
+        <img src="background4.jpg" class="background-option" alt="Background 4" data-image="background4.jpg">
+    </div>
+    <script>
+        const options = document.querySelectorAll(".background-option");
+        options.forEach(option => {
+            option.addEventListener("click", () => {
+                const image = option.getAttribute("data-image");
+                localStorage.setItem("selectedBackground", image);
+                window.location.href = "fifteen.html"; // Redirect to game page
+            });
+        });
+    </script>
+</body>
+</html>

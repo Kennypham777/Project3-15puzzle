@@ -15,15 +15,35 @@
 </head>
 <body>
     <h1>Fifteen Puzzle</h1>
-    
-    <!-- puzzle grid -->
+    <div id="stats">
+        <p>
+            Time: <span id="currentTime">0</span> seconds | 
+            Moves: <span id="currentMoves">0</span>
+        </p>
+        <p>
+            Best Time: <span id="bestTime">--</span> seconds | 
+            Best Moves: <span id="bestMoves">--</span>
+        </p>
+    </div>
+
     <div id="puzzle-container">
         <!-- tiles added here through js-->
     </div>
 
+
+
     <!-- shuffle button -->
     <button id="shuffle-btn">Shuffle</button>
-
+    <audio id="backgroundMusic" loop>
+        <source src="background.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <a href="backgroundselect.html" id="background-select-link">Select a Different Background Image!</a>
+    <script>
+        const selectedBackground = localStorage.getItem("selectedBackground") || "background1.png";
+        document.documentElement.style.setProperty('--puzzle-bg', `url(${selectedBackground})`);
+        
+    </script>
     <script src="fifteen.js"></script>
 </body>
 </html>
