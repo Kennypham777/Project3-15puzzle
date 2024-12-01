@@ -149,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function displayEndNotification() {
         stopTimer();
         updateBestScore();
+        // create an overlay
         const overlay = document.createElement("div");
         overlay.id = "game-over-overlay";
         overlay.style.position = "fixed";
@@ -162,6 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
         overlay.style.justifyContent = "center";
         overlay.style.zIndex = 1000;
 
+        // create a congratulatory message
         const message = document.createElement("div");
         message.style.color = "white";
         message.style.fontSize = "36px";
@@ -174,6 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
         overlay.appendChild(message);
         document.body.appendChild(overlay);
 
+        // restart button
         const restartButton = document.getElementById("restart-button");
         restartButton.addEventListener("click", () => {
             overlay.remove(); // Remove the overlay
@@ -186,46 +189,52 @@ document.addEventListener("DOMContentLoaded", function () {
     function checkCompletion() {
         const tiles = Array.from(puzzleContainer.getElementsByClassName("puzzle-tile"));
 
+         // check if all tiles are in the correct order
         for (let i = 0; i < tiles.length; i++) {
             if (parseInt(tiles[i].dataset.id) !== i) {
                 return false;
             }
         }
 
+        // empty tile is at index 15 (last position)
         const emptyTile = document.querySelector(".empty-tile");
         const emptyIndex = tiles.indexOf(emptyTile);
         if (emptyIndex !== 15) {
-            return false;
+            return false; // if the empty tile is not in the last position, the game is not complete
         }
 
-        return true;
+        return true; // all tiles are in the correct order, and the empty tile is in the last position
     }
 
     function movingTileClick(event) {
-        const clickedTile = event.target.closest(".puzzle-tile");
+        const clickedTile = event.target.closest(".puzzle-tile"); // directly get the clicked tile
         if (!clickedTile || !clickedTile.classList.contains("puzzle-tile")) {
             return;
         }
 
-        const tiles = Array.from(puzzleContainer.getElementsByClassName("puzzle-tile"));
-        const clickedIndex = tiles.indexOf(clickedTile);
-        const emptyTile = document.querySelector(".empty-tile");
-        const emptyIndex = tiles.indexOf(emptyTile);
+        const tiles = Array.from(puzzleContainer.getElementsByClassName("puzzle-tile"));  // get all tiles
+        const clickedIndex = tiles.indexOf(clickedTile); // find index of the clicked tile
+        const emptyTile = document.querySelector(".empty-tile"); // find the empty tile
+        const emptyIndex = tiles.indexOf(emptyTile); // find index of the empty tile
         if (clickedIndex === -1 || emptyIndex === -1) return;
         const neighbors = getEmptyTileNeighbors(emptyIndex);
-
+        
+        // check if the clicked tile is adjacent to the empty tile
         if (neighbors.includes(clickedIndex)) {
+            // swap the content and background position of the clicked tile and the empty tile
             [clickedTile.textContent, emptyTile.textContent] = [emptyTile.textContent, clickedTile.textContent];
             [clickedTile.style.backgroundPosition, emptyTile.style.backgroundPosition] =
                 [emptyTile.style.backgroundPosition, clickedTile.style.backgroundPosition];
             [clickedTile.dataset.id, emptyTile.dataset.id] = [emptyTile.dataset.id, clickedTile.dataset.id];
 
+            // update the class to reflect the new empty tile position
             clickedTile.classList.add("empty-tile");
             emptyTile.classList.remove("empty-tile");
 
-            incrementMoves();
-            highlightNeighbors();
-            
+            incrementMoves(); // inc move counter 
+            highlightNeighbors(); // highlight neighoring tile
+
+            // check if the game is completed
             if (checkCompletion()) {
                 displayEndNotification();
             }
@@ -248,14 +257,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     
     function shuffleTiles() {
-        const tiles = Array.from(puzzleContainer.getElementsByClassName("puzzle-tile"));
-        let emptyIndex = tiles.findIndex(tile => tile.classList.contains("empty-tile"));
-        const movesCount = 100;
+        const tiles = Array.from(puzzleContainer.getElementsByClassName("puzzle-tile")); // array of all tiles by getting elements with puzzle-tile class
+        let emptyIndex = tiles.findIndex(tile => tile.classList.contains("empty-tile"));  // locate the empty tile initially
+        const movesCount = 100; // number of moves to make for shuffling
 
-        for (let i = 0; i < movesCount; i++) {
-            const neighbors = getEmptyTileNeighbors(emptyIndex);
-            const randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
+        for (let i = 0; i < movesCount; i++) { // loop based on movesCount
+            const neighbors = getEmptyTileNeighbors(emptyIndex); // gets an array of all neighbors of the empty tile
+            const randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)]; // randomly pick a neighbor to swap empty tile with
 
+             // swap the empty tile with the randomly selected neighbor (swapping position, number, background, id)
             [tiles[emptyIndex].textContent, tiles[randomNeighbor].textContent] = 
                 [tiles[randomNeighbor].textContent, tiles[emptyIndex].textContent];
             [tiles[emptyIndex].style.backgroundPosition, tiles[randomNeighbor].style.backgroundPosition] = 
@@ -263,8 +273,10 @@ document.addEventListener("DOMContentLoaded", function () {
             [tiles[emptyIndex].dataset.id, tiles[randomNeighbor].dataset.id] = 
                 [tiles[randomNeighbor].dataset.id, tiles[emptyIndex].dataset.id];
 
+            // update the empty-tile class to the new position                
             tiles[randomNeighbor].classList.add("empty-tile");
             tiles[emptyIndex].classList.remove("empty-tile");
+            // after swapping, update the empty tile to the new position
             emptyIndex = randomNeighbor;
         }
     }
