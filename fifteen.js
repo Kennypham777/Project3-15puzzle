@@ -224,7 +224,8 @@ document.addEventListener("DOMContentLoaded", function () {
             emptyTile.classList.remove("empty-tile");
 
             incrementMoves();
-
+            highlightNeighbors();
+            
             if (checkCompletion()) {
                 displayEndNotification();
             }
@@ -232,17 +233,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function highlightNeighbors() {
-        const tiles = Array.from(puzzleContainer.getElementsByClassName("puzzle-tile"));
+        const tiles = Array.from(puzzleContainer.children);
         const emptyTile = document.querySelector(".empty-tile");
         const emptyIndex = tiles.indexOf(emptyTile);
-
+    
+        // clear existing highlights
         tiles.forEach(tile => tile.classList.remove("highlight"));
+    
+        // get neighbors and apply the highlight class
         const neighbors = getEmptyTileNeighbors(emptyIndex);
         neighbors.forEach(index => {
             tiles[index].classList.add("highlight");
         });
     }
-
+    
     function shuffleTiles() {
         const tiles = Array.from(puzzleContainer.getElementsByClassName("puzzle-tile"));
         let emptyIndex = tiles.findIndex(tile => tile.classList.contains("empty-tile"));
@@ -263,10 +267,9 @@ document.addEventListener("DOMContentLoaded", function () {
             tiles[emptyIndex].classList.remove("empty-tile");
             emptyIndex = randomNeighbor;
         }
-
-        highlightNeighbors();
     }
 
+    
     // Event Listeners
     shuffleButton.addEventListener("click", () => {
         resetGame();
@@ -275,5 +278,6 @@ document.addEventListener("DOMContentLoaded", function () {
     puzzleContainer.addEventListener("click", movingTileClick);
     createTiles(); // Initialize game board
     shuffleTiles(); // Shuffle tiles initially
+    highlightNeighbors();
     startTimer(); // Start timer once game begins
 });
